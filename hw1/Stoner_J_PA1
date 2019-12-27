@@ -1,0 +1,64 @@
+mmap - 6
+access - 3
+close - 2
+fstat - 3
+mprotect - 4
+munmap - 1
+brk - 3
+open - 3
+read - 1
+arch_prctl - 1
+write - 2
+
+1.
+
+a.
+
+	mmap - 6
+	mprotect - 4
+	open - 3
+	fstat - 3
+	access - 3
+
+	The program fails when "open" fails to open the "myTstFile" because it does not exist
+
+b.
+
+	write - 204
+
+	The most frequent call by far is write with over 200 system calls
+
+c.
+
+	fopen is a function from the standard io library that uses the system call open behind the scenes
+
+d.
+
+	printf is a function that uses the system call "write" to output text to the termial
+
+2.
+
+	The top 3 system calls for call are:
+	write - 27.56% of the time
+	mmap - 10.90% of the time
+	stat - 9.29% of the time
+
+	The system call "write" is likely used to output the calander to the terminal.
+	The system call "mmap" is likely used to access and read the system time. The linus manual says it is for mapping and unmapping files into memory which is likely how the system time is aquired.
+	The system call "stat" is for checking the status of file and could be used by "cal" for error catching and knowing when the file is able to be read from.
+
+3.
+
+a.
+
+	The system call "open" is used to open the directory. ex "open(".", O_RDONLY|O_NONBLOCK|O_DIRECTORY|O_CLOEXEC) = 3"
+
+b.
+
+	The "getdents" system call is used to get the number of entires that will be to be printed by ls. ex "getdents(3, /* 4 entries */, 32768)     = 120" and "getdents(3, /* 0 entries */, 32768)     = 0"
+
+
+c.
+
+	At the end of the output from strace, the system call "write" is used to output the text to the terminal. You can tell because the text it is writing matches the output from ls. ex "write(1, "new file  new file (copy)\n", 26new file  new file (copy)
+) = 26"
