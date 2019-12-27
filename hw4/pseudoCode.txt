@@ -1,0 +1,34 @@
+------Waiting line------
+
+while (park is open)
+  for every car
+    while (people are waiting)
+      add a person to the car
+      if (car is full)
+        send car on ride
+        break
+  wait for cars to return
+
+------Explorer car------
+
+
+while (park is open)
+  get number of people waiting
+  while (people are waiting)
+    add a person to car
+    if (car is full)
+      break
+  take people on the ride
+  
+
+------Arriving module------
+
+while (park is open)
+  get people that have arrived
+  while (people are waiting to get in line)
+    add person to the waiting line
+    if (line full)
+      turn leftovers away
+      break
+  check back in a minute if people have arrived
+
